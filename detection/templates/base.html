@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Iris Tumor Detector{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'detection/css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Custom CSS -->
+    <style>
+        /* Make specific text elements bright yellow with increased font size */
+        .bright-yellow {
+            color: #FFD700 !important; /* Bright yellow color */
+            font-size: 1.5rem; /* Increase the font size here */
+        }
+        /* Style for the main title */
+        .main-title {
+            font-size: 3rem; /* Make the title larger */
+            font-weight: bold; /* Make it bold */
+            color: #FFD700; /* Bright yellow color */
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-primary py-3 mb-4">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="animate__animated animate__fadeInLeft">
+                    <h1 class="main-title mb-0">TumorDetective</h1> <!-- Updated -->
+                </div>
+            </div>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link bright-yellow" href="{% url 'upload_image' %}">Upload Image</a> <!-- Updated -->
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link bright-yellow" href="{% url 'logout' %}">Logout</a> <!-- Updated -->
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link bright-yellow" href="{% url 'about' %}">About</a> <!-- Updated -->
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link bright-yellow" href="{% url 'register' %}">Register</a> <!-- Updated -->
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link bright-yellow" href="{% url 'login' %}">Login</a> <!-- Updated -->
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Messages Section -->
+    {% if messages %}
+        <div class="container my-4">
+            <div class="alert alert-primary" role="alert">
+                {% for message in messages %}
+                    {{ message }}<br>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <main class="container my-5">
+        {% block content %}{% endblock %}
+    </main>
+
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

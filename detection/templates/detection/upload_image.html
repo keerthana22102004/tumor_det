@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <!-- Steps for Tumor Detection -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Steps for Tumor Detection</h2>
+                </div>
+                <div class="card-body">
+                    <ol>
+                        <li>Ensure you have a clear, high-quality image for scanning.</li>
+                        <li>Click the "Choose File" button to upload your image.</li>
+                        <li>Wait for AI to analyze the image and generate the results.</li>
+                        <li>Review the results, and consult a doctor if necessary.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Upload Image for Tumor Detection -->
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Upload Image for Tumor Detection</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Detect Tumor</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
